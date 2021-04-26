@@ -4,7 +4,7 @@ namespace TheMovieDbApiClient
 {
     public class Class1
     {
-        public async Task GetValue()
+        public async Task GetValueAsync()
         {
             await Task.Delay(100);
         }
