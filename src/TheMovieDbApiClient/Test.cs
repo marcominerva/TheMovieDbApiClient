@@ -2,6 +2,6 @@
 {
     public class Test
     {
-
+        public int MyProperty { get; init; }
     }
 }
