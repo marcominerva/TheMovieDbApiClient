@@ -7,5 +7,7 @@ namespace TheMovieDbApiClient
     public interface ITmdbApiClient : IDisposable
     {
         Task<ListResult<Movie>> GetMoviesAsync(string query, string? language = null);
+
+        Task<ListResult<TvShow>> GetTvShowsAsync(string query, string? language = null);
     }
 }

@@ -45,6 +45,14 @@ namespace TheMovieDbApiClient
             return movies!;
         }
 
+        public async Task<ListResult<TvShow>> GetTvShowsAsync(string query, string? language = null)
+        {
+            var resource = new Uri(new Uri(BaseUrl), $"search/tv?language={language ?? Thread.CurrentThread.CurrentCulture.Name}&query={Uri.EscapeUriString(query)}");
+            var tvShows = await httpClient.GetFromJsonAsync<ListResult<TvShow>>(resource);
+
+            return tvShows!;
+        }
+
         public void Dispose()
         {
             if (useInnerHttpClient)
