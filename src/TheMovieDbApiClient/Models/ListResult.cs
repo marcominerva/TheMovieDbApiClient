@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -5,7 +6,7 @@ namespace TheMovieDbApiClient.Models
 {
     public class ListResult<T>
     {
-        public IEnumerable<T> Results { get; init; } = null!;
+        public IEnumerable<T> Results { get; init; } = Array.Empty<T>();
 
         public int Page { get; init; }
 
