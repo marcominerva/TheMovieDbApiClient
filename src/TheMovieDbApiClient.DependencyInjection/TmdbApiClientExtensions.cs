@@ -1,22 +1,21 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace TheMovieDbApiClient
+namespace TheMovieDbApiClient.DependencyInjection;
+
+public static class TheMovieDbApiClient
 {
-    public static class TheMovieDbApiClient
+    public static IHttpClientBuilder AddTmdbApiClient(this IServiceCollection services, Action<TmdbSettings> configuration)
     {
-        public static IHttpClientBuilder AddTmdbApiClient(this IServiceCollection services, Action<TmdbSettings> configuration)
+        var settings = new TmdbSettings();
+        configuration.Invoke(settings);
+
+        var httpClientBuilder = services.AddHttpClient<ITmdbApiClient, TmdbApiClient>(httpClient =>
         {
-            var settings = new TmdbSettings();
-            configuration.Invoke(settings);
+            var tmdbApiClient = new TmdbApiClient(httpClient, settings.SubscriptionKey);
+            return tmdbApiClient;
+        });
 
-            var httpClientBuilder = services.AddHttpClient<ITmdbApiClient, TmdbApiClient>(httpClient =>
-            {
-                var tmdbApiClient = new TmdbApiClient(httpClient, settings.SubscriptionKey);
-                return tmdbApiClient;
-            });
-
-            return httpClientBuilder;
-        }
+        return httpClientBuilder;
     }
 }

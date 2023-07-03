@@ -1,7 +1,6 @@
-﻿namespace TheMovieDbApiClient
+﻿namespace TheMovieDbApiClient;
+
+public class TmdbSettings
 {
-    public class TmdbSettings
-    {
-        public string SubscriptionKey { get; set; } = string.Empty;
-    }
+    public string SubscriptionKey { get; set; } = string.Empty;
 }
